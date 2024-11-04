@@ -1,47 +1,55 @@
 import * as cinemaServices from "../services/cinemaServices.js";
 
 export const getAllCinemas = async (req, res) => {
-    const responseData = await cinemaServices.getAllCinemas();
-    res.status(200).json(responseData.map(data => ({"id": data._id, "name": data.name})));
+    try{
+        const data = await cinemaServices.getAllCinemas();
+        res.status(200).json(data);
+    }catch(error){
+        console.log("Error while getting all cinemas", error);
+        res.status(400).json({message: "Something went wrong"});
+    }
 }
 
 
 export const getCinemaById = async (req, res) => {
     const { id } = req.params;
-    const responseData = await cinemaServices.getCinemaById(id);
-    const response = {
-        id: responseData._id,
-        name: responseData.name
+    try{
+        const data = await cinemaServices.getCinemaById(id);
+        res.status(200).json(data);
+    }catch(error){
+        console.log("Error while getting specific cinema", error);
+        res.status(400).json({message: "Something went wrong"});
     }
-    res.status(200).json(response);
 }
 
 export const addCinema = async (req, res) => {
-    const data = req.body;
-    const responseData = await cinemaServices.addCinema(data);
-    const response = {
-        id: responseData._id,
-        name: responseData.name
+    try{
+        const data = await cinemaServices.addCinema(req.body);
+        res.status(200).json({message: "New cinema added successfully", data: data});
+    }catch(error){
+        console.log("Error while adding new cinema", error);
+        res.status(400).json({message: "Something went wrong"});
     }
-    res.status(200).json(response);
 }
 
 export const updateCinema = async (req, res) => {
     const { id } = req.params;
-    const data = req.body;
-    const updatedCinema = await cinemaServices.updateCinema(id, data);
-    
-    const responseData = {
-        "id": updatedCinema._id,
-        "name": updatedCinema.name
+    try{
+        const data = await cinemaServices.updateCinema(id, req.body);
+        res.status(200).json({message: "cinema updated successfully", data: data});
+    }catch(error){
+        console.log("Error while updating cinema", error);
+        res.status(400).json({message: "Something went wrong"});
     }
-    res.status(200).json(responseData);
 }
 
 export const deleteCinema = async (req, res) => {
     const { id } = req.params;
-
-    const responseData = await cinemaServices.deleteCinema(id);
-
-    res.status(200).json(responseData)
+    try{
+        const data = await cinemaServices.deleteCinema(id);
+        res.status(200).json({message: "cinema deleted successfully", data: data})
+    }catch(error){
+        console.log("Error while deleting cinema", error);
+        res.status(400).json({message: "Something went wrong"});
+    }
 }
