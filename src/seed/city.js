@@ -1,34 +1,21 @@
-import dotenv from "dotenv";
-
 import City from "../models/City.js";
-import connectDB from "../config/database.js";
-
-dotenv.config();
-
+import seed from "../utils/seed.js";
 const cities = [
     {
-        "name": "kathmandu"
+        "id": "66dabb5f5b6dd72b994759d6",
+        "name": "Kathmandu"
     },
     {
+        "id": "66dabb5f5b6dd72b994759d7",
         "name": "Lalitpur"
     },
     {
+        "id": "66dabb5f5b6dd72b994759d8",
         "name": "Bhaktapur"
+    },
+    {
+        "id": "6728738ffb7bb25ed4012383",
+        "name": "pokhara"
     }
 ]
-const seedCities = async () => {
-    await connectDB();
-    await City.deleteMany({})
-    
-    try{
-        await City.insertMany(cities)
-    
-        console.log("Cities seeded");
-        process.exit(0);
-    }catch(error){
-        console.log("error seeding cities");
-        process.exit(1);
-    }
-}
-
-seedCities();
+seed(City, cities);
