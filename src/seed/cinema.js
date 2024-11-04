@@ -1,45 +1,31 @@
-import dotenv from "dotenv";
-
 import Cinema from "../models/Cinema.js";
-import connectDB from "../config/database.js";
-
-dotenv.config();
+import seed from '../utils/seed.js';
 
 const cinemas = [
     {
-        "name": "Cinema 1"
-    },
-        
-    {
-        "name": "Cinema 2"
+        name: "Labim Mall",
+        locatedIn: "67287f6d0bb6a430e4dd7dce",
     },
     {
-        "name": "Cinema 3"
+        name: "Civil Mall",
+        locatedIn: "67287f6d0bb6a430e4dd7dce",
     },
     {
-        "name": "Cinema 4"
+        name: "Chhaya Center",
+        locatedIn: "67287f6d0bb6a430e4dd7dce",
     },
     {
-        "name": "Cinema 5"
+        name: "CG Mall",
+        locatedIn: "67287f6d0bb6a430e4dd7dd1"
     },
     {
-        "name": "Cinema 6"
+        name: "Rising Mall",
+        locatedIn: "67287f6d0bb6a430e4dd7dd1"
+    },
+    {
+        name: "Trade Mall",
+        locatedIn: "67287f6d0bb6a430e4dd7dd1"
     }
 ]
 
-const seedCinemas = async () => {
-    await connectDB();
-    await Cinema.deleteMany({})
-    
-    try{
-        await Cinema.insertMany(cinemas)
-    
-        console.log("Cinemas seeded");
-        process.exit(0);
-    }catch(error){
-        console.log("error seeding cinemas");
-        process.exit(1);
-    }
-}
-
-seedCinemas();
+seed(Cinema, cinemas);
