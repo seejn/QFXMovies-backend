@@ -3,8 +3,8 @@ import * as movieController from "../controllers/MovieController.js";
 
 export const router = express.Router();
 
-router.get("/getAllMovies", movieController.getAllMovies);
-router.get("/getMovieById/:id", movieController.getMovieById);
-router.post("/addMovie", movieController.addMovie);
-router.put("/updateMovie/:id", movieController.updateMovie);
-router.delete("/deleteMovie/:id", movieController.deleteMovie);
+router.get("/movies", movieController.getAllMovies);
+router.get("/movies/:id", movieController.getMovieById);
+router.post("/movies", movieController.addMovie);
+router.patch("/movies/:id", movieController.updateMovie);
+router.delete("/movies/:id", movieController.deleteMovie);
