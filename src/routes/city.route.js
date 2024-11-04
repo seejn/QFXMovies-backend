@@ -3,4 +3,8 @@ import * as cityController from "../controllers/CityController.js"
 
 export const router = express.Router();
 
-router.get("/getAllCities", cityController.getAllCities);
+router.get("/cities", cityController.getAllCities);
+router.get("/cities/:id", cityController.getCity);
+router.post("/cities", cityController.createCity);
+router.delete("/cities/:id", cityController.removeCity);
+router.patch("/cities/:id", cityController.updateCity);
