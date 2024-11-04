@@ -5,11 +5,8 @@ import cors from "cors";
 import { router as movieRoute } from "./src/routes/movie.route.js";
 import { router as cityRoute } from "./src/routes/city.route.js";
 import { router as cinemaRoute } from "./src/routes/cinema.route.js";
-import connectDB from "./src/config/database.js";
 
 dotenv.config();
-connectDB()
-
 const app = express();
 
 app.use(express.json());

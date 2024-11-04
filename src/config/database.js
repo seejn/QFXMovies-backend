@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
     try{
-        console.log(process.env.MONGODB_URI)
         await mongoose.connect(process.env.MONGODB_URI);
         console.log("Database Connected...");
     }catch(error){
-        console.log("Error connecting to database", error);
+        if(error.name === "MongooseServerSelectionError"){
+            console.log("Database is not running or is not accessible...");
+        }
         process.exit(1);   
     }
 }
