@@ -1,11 +1,11 @@
 import Movie from "../models/Movie.js"
 
 export const getAllMovies = async () => {
-    return await Movie.find();
+    return await Movie.find().populate("genre");
 }
 
 export const getMovieById = async (id) => {
-    return await Movie.findOne({"_id": id});
+    return await Movie.findOne({"_id": id}).populate("genre");
 }
 
 export const addMovie = async (data) => {
