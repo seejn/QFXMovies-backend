@@ -5,6 +5,7 @@ import cors from "cors";
 import { router as movieRoute } from "./src/routes/movie.route.js";
 import { router as cityRoute } from "./src/routes/city.route.js";
 import { router as cinemaRoute } from "./src/routes/cinema.route.js";
+import { router as genreRoute } from "./src/routes/genre.route.js";
 
 dotenv.config();
 const app = express();
@@ -16,5 +17,6 @@ app.use(cors());
 app.use("/api", movieRoute);
 app.use("/api", cityRoute);
 app.use("/api", cinemaRoute);
+app.use("/api", genreRoute);
 
 export default app;
