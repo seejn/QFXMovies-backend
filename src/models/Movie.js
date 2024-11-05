@@ -9,6 +9,12 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    genre: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Genre"
+        }
+    ]
 },
 {
     timestamps: true
