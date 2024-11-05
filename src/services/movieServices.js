@@ -13,17 +13,9 @@ export const addMovie = async (data) => {
 }
 
 export const updateMovie = async (id, data) => {
-    try{
-        return await Movie.findOneAndUpdate({"_id": id}, data);
-    }catch(error){
-        console.log("From service", error);
-    }
+    return await Movie.findOneAndUpdate({"_id": id}, data, {new: true});
 }
 
 export const deleteMovie = async (id) => {
-    try{
-        return await Movie.findOneAndDelete({"_id": id});
-    }catch(error){
-        console.log(error);
-    }
+    return await Movie.findOneAndDelete({"_id": id});
 }
