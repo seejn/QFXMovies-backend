@@ -1,7 +1,7 @@
-import express from "express";
+import { Router } from "express";
 import * as movieController from "../controllers/MovieController.js";
 
-export const router = express.Router();
+export const router = Router();
 
 router.get("/movies", movieController.getAllMovies);
 router.get("/movies/:id", movieController.getMovieById);

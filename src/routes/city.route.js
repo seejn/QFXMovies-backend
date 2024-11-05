@@ -1,7 +1,7 @@
-import express from "express";
+import { Router } from "express";
 import * as cityController from "../controllers/CityController.js"
 
-export const router = express.Router();
+export const router = Router();
 
 router.get("/cities", cityController.getAllCities);
 router.get("/cities/:id", cityController.getCity);

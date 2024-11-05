@@ -1,7 +1,7 @@
-import express from "express";
+import { Router } from "express";
 import * as cinemaController from "../controllers/CinemaController.js"
 
-export const router = express.Router()
+export const router = Router()
 
 router.get("/cinemas", cinemaController.getAllCinemas);
 router.get("/cinemas/:id", cinemaController.getCinemaById);
