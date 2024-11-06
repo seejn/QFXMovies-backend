@@ -1,5 +1,14 @@
 import mongoose, {Schema} from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { 
+    SECRET_ACCESS_KEY,
+    ACCESS_EXPIRY, 
+    SECRET_REFRESH_KEY,
+    REFRESH_EXPIRY
+} from '../config/server.js';
+
+import Token from "./Token.js";
 
 const credentialsSchema = new mongoose.Schema({
     password: {
@@ -27,6 +36,10 @@ const userSchema = new Schema({
     credential: {
         type: Schema.Types.ObjectId,
         ref: "Credentials"
+    },
+    isLoggedIn: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -74,23 +87,55 @@ userSchema.methods.updatePassword = async function (plainPassword) {
       await credentials.save(); 
     }
 };
+userSchema.methods.generateAccessToken = function(){
+    return jwt.sign(
+        {
+            id: this._id,
+            email: this.email,
+            role: this.role.name
+        },
+        SECRET_ACCESS_KEY,
+        {
+            expiresIn: ACCESS_EXPIRY
+        }
+    );
+}
+userSchema.methods.generateRefreshToken = function(){
+    return jwt.sign(
+        {
+            id: this._id,
+            email: this.email,
+            role: this.role.name
+        },
+        SECRET_REFRESH_KEY,
+        {
+            expiresIn: REFRESH_EXPIRY
+        }
+    );
+}
 
-userSchema.statics.findByCredentials = async (email, password) => {
-    try {
-        const user = await userModel.findOne({ email: email }).populate("credential").populate(role);
-        if (!user) {
-            throw new Error("Invalid email or password");
-        }
-        const checkpassword = await bcrypt.compare(password, user.credential.password);
-        if (!checkpassword) {
-            throw new Error("Invalid email or password");
-        }
-        const { credential, ...rest} = user;
-        return rest;
-    } catch (error) {
-        console.error("Login error:", error.message);
-        throw new Error("Authentication failed");
+userSchema.statics.findByCredentials = async function(email, password){
+    const user = await this.findOne({ email: email }).populate("credential").populate("role");
+    if (!user) {
+        const error = new Error("Invalid email or password");
+        error.status = 404;
+        throw error;
     }
+    
+    const token = await Token.findOne({user: user._id});
+    if(token){
+        const error = new Error("User already LoggedIn");
+        error.status = 400;
+        throw error;
+    }
+
+    const checkpassword = await bcrypt.compare(password, user.credential.password);
+    if (!checkpassword) {
+        const error = new Error("Invalid email or password");
+        error.status = 404;
+        throw error;
+    }
+    return user;
 };
   
 
