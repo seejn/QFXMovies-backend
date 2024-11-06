@@ -17,5 +17,5 @@ export const updateMovie = async (id, data) => {
 }
 
 export const deleteMovie = async (id) => {
-    return await Movie.findOneAndDelete({"_id": id});
+    return await Movie.findByIdAndDelete(id);
 }

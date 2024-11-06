@@ -17,5 +17,5 @@ export const updateCinema = async (id, data) => {
 }
 
 export const deleteCinema = async (id) => {
-    return await Cinema.findOneAndDelete({"_id": id});
+    return await Cinema.findByIdAndDelete(id);
 }

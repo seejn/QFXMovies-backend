@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { MONGODB_URI } from "./server.js";
 
 const connectDB = async () => {
     try{
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(MONGODB_URI);
         console.log("Database Connected...");
     }catch(error){
         if(error.name === "MongooseServerSelectionError"){
