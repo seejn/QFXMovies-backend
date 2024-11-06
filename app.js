@@ -1,5 +1,4 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 
 import { router as movieRoute } from "./src/routes/movie.route.js";
@@ -12,7 +11,6 @@ import { router as nowplayingmovieRoute } from "./src/routes/nowplayingmovie.rou
 import { router as userRoute } from "./src/routes/user.route.js";
 import { router as roleRoute} from "./src/routes/role.route.js";
 
-dotenv.config();
 const app = express();
 
 app.use(express.json());
