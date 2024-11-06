@@ -8,6 +8,10 @@ export const getAllRoles = async () => {
     return await Role.find();
 }
 
+export const getRoleByName = async (role) => {
+    return await Role.findOne({name: role});
+}
+
 export const updateRole = async (name ,data) => {
     return await Role.findOneAndUpdate({name: name}, data, {new: true});
 }
