@@ -13,6 +13,25 @@ export const register = async (req, res) => {
         res.status(400).json({message: "Something went wrong"});
     }
 }
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+    try{
+        const data = await UserServices.login(email, password);
+        res.status(200).json({message: "Login Successful", data: data});
+    }catch(error){
+        console.log("Error while logging in user", error);
+        res.status(400).json({message: error.message});
+    }
+}
+export const logout = async (req, res) => {
+    try{
+        await UserServices.logout(req.user.id);
+        res.status(200).json({message: "Logout Successful"});
+    }catch(error){
+        console.log("Error while logging out user", error);
+        res.status(400).json({message: error.message});
+    }
+}
 export const getAllUsers = async (req, res) => {
     try{
         const data = await UserServices.getAllUsers();
