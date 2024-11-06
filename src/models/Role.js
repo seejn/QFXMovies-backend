@@ -7,4 +7,12 @@ const schema = new Schema({
     }
 });
 
+schema.set("toJSON", {
+    virtuals: true,
+    transform: function(doc, ret, next){
+        const { __v, _id, id, ...rest} = ret;
+        return rest;
+    }
+})
+
 export default mongoose.model("Role", schema);
