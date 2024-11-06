@@ -13,5 +13,5 @@ export const updateGenre = async (id, data) => {
     return await Genre.findOneAndUpdate({_id: id}, data, {new: true});
 }
 export const deleteGenre = async (id) => {
-    return await Genre.findOneAndDelete({_id: id})
+    return await Genre.findByIdAndDelete(id);
 }
