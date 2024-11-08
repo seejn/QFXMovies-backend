@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import * as UserServices from "../services/UserServices.js";
 import { getRoleByName } from "../services/RoleServices.js";
 
@@ -31,6 +32,12 @@ export const logout = async (req, res) => {
         console.log("Error while logging out user", error);
         res.status(400).json({message: error.message});
     }
+}
+export const generateNewAccessToken = async (req, res) => {
+    const {id} = req.user;
+    const user = await UserServices.getUserById(id);
+    const accessToken = user.generateAccessToken();
+    return res.status(200).json({accessToken: accessToken});
 }
 export const getAllUsers = async (req, res) => {
     try{
