@@ -3,8 +3,12 @@ import * as UserServices from "../services/UserServices.js";
 import { getRoleByName } from "../services/RoleServices.js";
 
 export const register = async (req, res) => {
-    const {username, email, password, role} = req.body;
-    const {_id: roleId} = await getRoleByName(role);
+    const {username, email, password, role: roleName} = req.body;
+    const role = await getRoleByName(roleName);
+    if(!role){
+        return res.status(400).json({message: "Invalid Role"});
+    }
+    const roleId = role._id;
 
     try{
         const data = await UserServices.register(username, email, password, roleId);
@@ -51,7 +55,24 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     const {id} = req.params;
     try{
-        const data = await UserServices.getUserById();
+        const data = await UserServices.getUserById(id);
+        res.status(201).json(data);
+    }catch(error){
+        console.log("Error while fetching user", error);
+        res.status(400).json({message: "Something went wrong"});
+    }
+}
+
+export const getUserByRole = async (req, res) => {
+    const {role: roleName} = req.params;
+    const role = await getRoleByName(roleName);
+    if(!role){
+        return res.status(400).json({message: "Invalid Role"});
+    }
+    const roleId = role._id;
+
+    try{
+        const data = await UserServices.getUserByRole(roleId);
         res.status(201).json(data);
     }catch(error){
         console.log("Error while fetching user", error);

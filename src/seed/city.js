@@ -2,19 +2,19 @@ import City from "../models/City.js";
 import seed from "../utils/seed.js";
 const cities = [
     {
-        "id": "66dabb5f5b6dd72b994759d6",
+        "id": "672c1fa63f4eb09b99516349",
         "name": "Kathmandu"
     },
     {
-        "id": "66dabb5f5b6dd72b994759d7",
+        "id": "672c1fa63f4eb09b9951634a",
         "name": "Lalitpur"
     },
     {
-        "id": "66dabb5f5b6dd72b994759d8",
+        "id": "672c1fa63f4eb09b9951634b",
         "name": "Bhaktapur"
     },
     {
-        "id": "6728738ffb7bb25ed4012383",
+        "id": "672c1fa63f4eb09b9951634c",
         "name": "pokhara"
     }
 ]

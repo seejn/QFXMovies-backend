@@ -13,7 +13,7 @@ const seed = async (model, data) => {
         console.log("Seed Completed successfully");
         process.exit(0);
     }catch(error){
-        console.log("error seeding...");
+        console.log("error seeding...", error);
         process.exit(1);
     }
 }
