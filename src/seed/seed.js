@@ -19,7 +19,7 @@ const seed = async (model, data) => {
     }
 }
 
-const importAllFiles = async () => {
+(async () => {
     try{
         const datas = await fs.readdir(dataPath);
         console.log("Data to seed:  ", datas);
@@ -48,6 +48,4 @@ const importAllFiles = async () => {
     }catch(error){
         console.log(error);
     }
-}
-
-importAllFiles();
+})();
