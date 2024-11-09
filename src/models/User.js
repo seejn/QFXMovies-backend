@@ -26,7 +26,8 @@ const userSchema = new Schema({
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
@@ -35,7 +36,8 @@ const userSchema = new Schema({
     },
     credential: {
         type: Schema.Types.ObjectId,
-        ref: "Credentials"
+        ref: "Credentials",
+        unique: true
     },
     isLoggedIn: {
         type: Boolean,
