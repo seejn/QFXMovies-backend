@@ -8,6 +8,9 @@ export const getAllUsers = async () => {
 export const getUserById = async (id) => {
     return await User.findById(id).populate("role");
 }
+export const getUserByRole = async (id) => {
+    return await User.find({role: id}).populate("role");
+}
 export const register = async (username, email, password, role) => {
     const user = new User({
         username: username, 
