@@ -6,6 +6,7 @@ export const router = Router();
 
 router.get("/users", UserController.getAllUsers);
 router.get("/users/:id", UserController.getUserById);
+router.get("/users/role/:role", UserController.getUserByRole);
 router.patch("/users/:id", UserController.updateUser);
 router.delete("/users/:id", UserController.deleteUser);
 
