@@ -7,6 +7,6 @@ export const router = Router();
 
 router.get("/movies", movieController.getAllMovies);
 router.get("/movies/:id", movieController.getMovieById);
-router.post("/movies", AuthJWT, AuthorizedRoles(["theatre"]), movieController.addMovie);
-router.patch("/movies/:id", AuthJWT, AuthorizedRoles(["theatre"]), movieController.updateMovie);
-router.delete("/movies/:id", AuthJWT, AuthorizedRoles(["theatre"]), movieController.deleteMovie);
+router.post("/movies", AuthJWT, AuthorizedRoles(["admin", "theatre"]), movieController.addMovie);
+router.patch("/movies/:id", AuthJWT, AuthorizedRoles(["admin", "theatre"]), movieController.updateMovie);
+router.delete("/movies/:id", AuthJWT, AuthorizedRoles(["admin", "theatre"]), movieController.deleteMovie);
