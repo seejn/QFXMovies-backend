@@ -2,10 +2,8 @@ import fs from "fs/promises";
 import path from "path";
 import { pathToFileURL } from 'url';
 
-import dotenv from "dotenv";
 import connectDB from "../config/database.js";
 
-dotenv.config();
 const modelPath = path.join(process.cwd(), "src", "models");
 const dataPath = path.join(process.cwd(), "src", "seed", "data");
 
