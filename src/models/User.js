@@ -37,7 +37,8 @@ const userSchema = new Schema({
     credential: {
         type: Schema.Types.ObjectId,
         ref: "Credentials",
-        unique: true
+        unique: true,
+        sparse: true // allow for having multiple nulls even though unique = true
     },
     isLoggedIn: {
         type: Boolean,
