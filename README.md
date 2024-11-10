@@ -1,5 +1,5 @@
 # QFXMovies-Backend
-QFXMovies-backend is a robust backend API built using Node.js with Express, designed to support a movie booking platform by managing movies, theaters, and user bookings through CRUD operations and role-based access controls.
+QFXMovies-backend is a robust backend API built using Node.js with Express, MongoDB for database, designed to support a movie booking platform by managing movies, theaters, and user bookings through CRUD operations and role-based access controls.
 ## Setup
 
 ### Clone the Repository
