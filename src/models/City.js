@@ -8,4 +8,12 @@ const schema = new Schema({
     }
 });
 
+schema.set("toJSON", {
+    virtuals: true,
+    transform: function (doc, ret, next) {
+        const {_id, __v, ...rest} = ret;
+        return rest;
+    }
+})
+
 export default mongoose.model("City", schema);
